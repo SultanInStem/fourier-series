@@ -1,4 +1,5 @@
 import pygame
+import sys
 from config import SCREEN_SIZE
 class Canvas: 
     def __init__(self): 
@@ -22,3 +23,11 @@ class Canvas:
 
         pygame.display.flip()
         self.clock.tick(self.fps)
+
+    def run(self): 
+        while(self.running): 
+            self.handle_events()
+            self.update()
+            self.render()
+        pygame.quit()
+        sys.exit()
