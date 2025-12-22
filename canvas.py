@@ -9,11 +9,25 @@ class Canvas:
         self.running = True
         self.clock = pygame.time.Clock()
         self.fps = 60 
+        self.N = 5 # Number of vectors 
+        self.drawing = False
+        self.curve_points = [] 
+
+
+
 
     def handle_events(self): 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
                 self.running = False 
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                if event.button == 1: 
+                    self.drawing = True
+                    self.curve_points = []
+            elif event.type == pygame.MOUSEBUTTONUP: 
+                if event.button == 1: 
+                    self.drawing = False
+
 
     def update(self): 
         pass 
