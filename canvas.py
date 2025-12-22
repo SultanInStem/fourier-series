@@ -11,7 +11,7 @@ class Canvas:
         self.fps = 60 
         self.N = 5 # Number of vectors 
         self.drawing = False
-        self.curve_points = [] 
+        self.curve_points = [] # stores points as complex numbers x + iy 
 
 
 
@@ -27,6 +27,10 @@ class Canvas:
             elif event.type == pygame.MOUSEBUTTONUP: 
                 if event.button == 1: 
                     self.drawing = False
+            elif event.type == pygame.MOUSEMOTION: 
+                if self.drawing: 
+                    x, y = event.pos
+                    self.curve_points.append((x,y))
 
 
     def update(self): 
@@ -34,6 +38,9 @@ class Canvas:
 
     def render(self): 
         self.screen.fill((0,0,0))
+
+        if len(self.curve_points) > 1: 
+            pygame.draw.lines(self.screen, (255,255,255), False, self.curve_points, 2)
 
         pygame.display.flip()
         self.clock.tick(self.fps)
