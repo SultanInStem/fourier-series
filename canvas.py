@@ -1,6 +1,7 @@
 import pygame
 import sys
 from config import SCREEN_SIZE
+from funcs import to_screen_coords, to_math_coords, resample_points
 class Canvas: 
     def __init__(self): 
         pygame.init()
@@ -12,6 +13,7 @@ class Canvas:
         self.N = 5 # Number of vectors 
         self.drawing = False
         self.curve_points = [] # stores points as complex numbers x + iy 
+        self.resolution = 500
 
 
 
@@ -27,6 +29,7 @@ class Canvas:
             elif event.type == pygame.MOUSEBUTTONUP: 
                 if event.button == 1: 
                     self.drawing = False
+                    self.curve_points = resample_points(self.curve_points, self.resolution) # Resample to 500 points
             elif event.type == pygame.MOUSEMOTION: 
                 if self.drawing: 
                     x, y = event.pos
