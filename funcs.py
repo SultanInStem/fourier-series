@@ -23,7 +23,9 @@ def resample_points(raw_points, n_target):
     total_length = 0
     segment_lengths = []
     for i in range(len(raw_points) - 1):
-        d = math.dist(raw_points[i], raw_points[i+1])
+        p1 = raw_points[i]
+        p2 = raw_points[i+1]
+        d = math.dist((p1.real, p1.imag), (p2.real, p2.imag))
         segment_lengths.append(d)
         total_length += d
         
@@ -48,9 +50,9 @@ def resample_points(raw_points, n_target):
         p1 = raw_points[current_segment_idx]
         p2 = raw_points[current_segment_idx + 1]
         
-        new_x = p1[0] + (p2[0] - p1[0]) * ratio
-        new_y = p1[1] + (p2[1] - p1[1]) * ratio
-        resampled.append((new_x, new_y))
+        new_x = p1.real + (p2.real - p1.real) * ratio
+        new_y = p1.imag + (p2.imag - p1.imag) * ratio
+        resampled.append(complex(new_x, new_y))
         
     resampled.append(raw_points[-1])
     return resampled

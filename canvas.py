@@ -29,7 +29,7 @@ class Canvas:
             elif event.type == pygame.MOUSEBUTTONUP: 
                 if event.button == 1: 
                     self.drawing = False
-                    # self.curve_points = resample_points(self.curve_points, self.resolution) # Resample to 500 points
+                    self.curve_points = resample_points(self.curve_points, self.resolution) # Resample to 500 points
             elif event.type == pygame.MOUSEMOTION: 
                 if self.drawing: 
                     x, y = event.pos
