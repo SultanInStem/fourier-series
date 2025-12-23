@@ -54,3 +54,14 @@ def resample_points(raw_points, n_target):
         
     resampled.append(raw_points[-1])
     return resampled
+
+
+
+def compute_fourier_coefficients(points, n):
+    N = len(points)
+    coefficients = []
+
+
+
+
+    return coefficients

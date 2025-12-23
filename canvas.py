@@ -29,11 +29,11 @@ class Canvas:
             elif event.type == pygame.MOUSEBUTTONUP: 
                 if event.button == 1: 
                     self.drawing = False
-                    self.curve_points = resample_points(self.curve_points, self.resolution) # Resample to 500 points
+                    # self.curve_points = resample_points(self.curve_points, self.resolution) # Resample to 500 points
             elif event.type == pygame.MOUSEMOTION: 
                 if self.drawing: 
                     x, y = event.pos
-                    self.curve_points.append((x,y))
+                    self.curve_points.append(complex(x,y))
 
 
     def update(self): 
@@ -41,9 +41,8 @@ class Canvas:
 
     def render(self): 
         self.screen.fill((0,0,0))
-
         if len(self.curve_points) > 1: 
-            pygame.draw.lines(self.screen, (255,255,255), False, self.curve_points, 2)
+            pygame.draw.lines(self.screen, (0,255,0), False, [(p.real, p.imag) for p in self.curve_points], 2)
 
         pygame.display.flip()
         self.clock.tick(self.fps)
