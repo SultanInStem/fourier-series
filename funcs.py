@@ -1,4 +1,5 @@
 from config import SCREEN_SIZE 
+import math
 CENTER_X = SCREEN_SIZE[0] // 2
 CENTER_Y = SCREEN_SIZE[1] // 2
 
@@ -14,7 +15,6 @@ def to_math_coords(screen_x, screen_y):
     return (math_x, math_y)
 
 
-import math
 
 def resample_points(raw_points, n_target):
     if len(raw_points) < 2: return raw_points
@@ -61,9 +61,10 @@ def resample_points(raw_points, n_target):
 
 def compute_fourier_coefficients(points, n):
     N = len(points)
+    if N == 0:
+        return []
     coefficients = []
-
-
-
-
+    for k in range(-n//2, n//2 + 1):
+        c_k = sum(points[j] * complex(math.cos(-2 * math.pi * k * j / N), math.sin(-2 * math.pi * k * j / N)) for j in range(N)) / N
+        coefficients.append((k, c_k))
     return coefficients
